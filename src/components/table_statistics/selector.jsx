@@ -11,7 +11,7 @@ export const Selector = () => {
   
   const getCountry = () => {
     // let urlCountry = ;
-    axios.get("http://127.0.0.1:8000/api/country-data-covid/countrys/")
+    axios.get("https://simulador-covid19-backend.herokuapp.com/api/country-data-covid/countrys/")
       .then((response) => {
           setCountryState(response.data);
       })

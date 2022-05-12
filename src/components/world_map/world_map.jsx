@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function getUsers(datum){
     const getUsers = () => {
-        axios.get('http://127.0.0.1:8000/api/country-data-covid/'+datum+'/')
+        axios.get('https://simulador-covid19-backend.herokuapp.com/api/country-data-covid/'+datum+'/')
         .then(response => {
             document.getElementById("entrada1").value = response.data.infected;
             document.getElementById("entrada2").value = response.data.dead;
