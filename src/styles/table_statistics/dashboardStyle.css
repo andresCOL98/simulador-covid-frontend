@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+
+
+.seccion-datos{
+    display: flex;
+    justify-content: center;
+}
+
+
+.contenedor-informacion{
+    width: 100%;
+    height: 100%;
+    font-size: small;
+    padding-top: 10px;
+    margin: 25px auto;
+}
+
+.header-informacion{
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;    
+}
+.header-informacion h1{
+    background-color: #092c74;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
