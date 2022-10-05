@@ -57,7 +57,7 @@ function refresh(svg, path, countryTooltip, countryById) {
             if($options[i].value==datum.id){
                 $select.selectedIndex = $options[i].index;
             }
-            console.log("epa",$select.options[i].index);
+            console.log($select.options[i].index);
         }
         
         console.log("selectedIndex",$select.selectedIndex);

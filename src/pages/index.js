@@ -9,11 +9,10 @@ import {OptionButton} from '../components/options_button/options_button'
 function App(){
     return(
         <div className="App">
-
+            
             <Header />
 
             <div className='contenedor'>
-                {/* <OptionButton /> */}
                 <WorldMap />
                 <Dashboard/>
             </div>
