@@ -28,8 +28,6 @@ h2{
 }
 
 .contenedor {
-    /*display: flex;
-    justify-content: space-between;*/
     width: 1550px;
     height: 100%;
 }
@@ -46,7 +44,6 @@ h2{
 .mapamundi {
     display: flex;
     justify-content: center;
-   
     width: 100%;
 }
 

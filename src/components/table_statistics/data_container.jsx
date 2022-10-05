@@ -17,16 +17,16 @@ function DataContainer(){
 
       <div className='contenedores-hijos'>
         <h2>Personas Infectadas</h2>
-        <input id="entrada1" type="text"></input>
+        <input inputMode='numeric' id="entrada1" type="text" readOnly></input>
       </div>
 
       <div className='contenedores-hijos'>
         <h2>Personas Muertas</h2>
-        <input id="entrada2" type="text"></input>
+        <input inputMode='numeric' id="entrada2" type="text" readOnly></input>
       </div>
       <div className='contenedores-hijos'>
         <h2>Personas en UCI</h2>
-        <input id="entrada3" type="text"></input>
+        <input inputMode='numeric' id="entrada3" type="text" readOnly></input>
       </div>
     </div>
   );

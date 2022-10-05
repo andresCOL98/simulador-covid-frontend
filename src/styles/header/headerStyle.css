@@ -4,6 +4,10 @@
     display: 'flex'
 }
 
+.Logo_Universidad{
+    position: absolute;
+}
+
 .title {
     height: 10%;
     text-align: center;

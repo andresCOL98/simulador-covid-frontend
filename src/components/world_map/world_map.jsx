@@ -10,9 +10,10 @@ function getUsers(datum){
     const getUsers = () => {
         axios.get('https://simulador-covid19-backend.herokuapp.com/api/country-data-covid/'+datum+'/')
         .then(response => {
-            document.getElementById("entrada1").value = response.data.infected;
-            document.getElementById("entrada2").value = response.data.dead;
-            document.getElementById("entrada3").value = response.data.uci;
+            document.getElementById("entrada1").value = FormatDoubleValues(response.data.infected);
+            document.getElementById("entrada2").value = FormatDoubleValues(response.data.dead);
+            document.getElementById("entrada3").value = FormatDoubleValues(response.data.uci);
+            document.getElementById("fechaDatos").innerText = "Fecha reporte de los datos: " + response.data.fecha;
             // console.log(`GET users`, dataCountry);
         })
         .catch(error => console.error(error));
@@ -20,6 +21,10 @@ function getUsers(datum){
         
     return getUsers();
 }
+
+function FormatDoubleValues(value){
+    return new Intl.NumberFormat('de-De', {minimumFractionDigits: 0}).format(value);
+};
 
 function refresh(svg, path, countryTooltip, countryById) {
 
@@ -203,7 +208,6 @@ function WorldMap() {
   return (
       <div className='mapamundi'>
       </div>
-    
   );
 }
 

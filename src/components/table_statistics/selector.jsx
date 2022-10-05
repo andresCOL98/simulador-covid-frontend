@@ -27,7 +27,7 @@ export const Selector = () => {
   
 
   return <div className='seleccion-pais'>
-      <h2>Seleccione el pais</h2>
+      <h2>Seleccione el país</h2>
       <select name="select" id="selector">
           {country.map((element) => {
             return (
