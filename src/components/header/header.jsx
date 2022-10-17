@@ -7,7 +7,7 @@ const Header = (props) =>{
     return(
         <div className='father'>
             <div className='title'>
-            <h1>Simulador de propagación del Covid-19 basado en una red compleja</h1>
+            <h1>World Map Codiv-19</h1>
             </div>
             <div className='Logo_Universidad' >
                 <img src={logoUniversidad} alt="" />

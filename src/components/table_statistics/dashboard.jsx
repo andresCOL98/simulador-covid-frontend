@@ -11,11 +11,11 @@ class Dashboard extends React.Component {
             <div className='contenedor-informacion'>
                 
                 <div className='clsButton'>
-                   <button class='btAnimacion' > <a href="#" target="_blank"></a>Activar Animación </button> 
+                   <button class='btAnimacion' > <a href="#" target="_blank"></a>Activate Animation </button> 
                 </div>
                 
                 <div className='header-informacion'>
-                    <h1>Información Covid-19</h1>
+                    <h1>Covid-19 Information</h1>
                 </div>
 
                 <div className='seccion-datos'>
@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
                 <div className='contenedor-infProyecto'>
                     <h3 id='fechaDatos'></h3>
                     <h3>
-                    Fuente de los datos:  <a className='PathData' href="https://github.com/CSSEGISandData/COVID-19">COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
+                    Data source:  <a className='PathData' href="https://github.com/CSSEGISandData/COVID-19">COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
                     </h3>
                 </div>
                 

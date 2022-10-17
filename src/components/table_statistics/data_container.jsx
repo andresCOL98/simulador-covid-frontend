@@ -16,16 +16,16 @@ function DataContainer(){
       <Selector></Selector>
 
       <div className='contenedores-hijos'>
-        <h2>Personas Infectadas</h2>
+        <h2>infected people</h2>
         <input inputMode='numeric' id="entrada1" type="text" readOnly></input>
       </div>
 
       <div className='contenedores-hijos'>
-        <h2>Personas Muertas</h2>
+        <h2>Dead people</h2>
         <input inputMode='numeric' id="entrada2" type="text" readOnly></input>
       </div>
       <div className='contenedores-hijos'>
-        <h2>Personas en UCI</h2>
+        <h2>Vaccinated People</h2>
         <input inputMode='numeric' id="entrada3" type="text" readOnly></input>
       </div>
     </div>
