@@ -6,15 +6,31 @@ import axios from 'axios';
 
 // capturamos las secciones de nuestra pantalla que queremos que se mueva
 
+function activeNet(isActive, svg){
+    if(!isActive){
+        isActive = true;
+        svg.selectAll(".line")
+            .style("opacity", ".6")
+        svg.selectAll(".point")
+            .style("opacity", ".4")
+    }else{
+        isActive = false;
+        svg.selectAll(".line")
+            .style("opacity", ".0")
+        svg.selectAll(".point")
+            .style("opacity", ".0")
+    }
+    return isActive;
+}
+
 function getUsers(datum){
     const getUsers = () => {
-        axios.get('https://simulador-covid19-backend.herokuapp.com/api/country-data-covid/'+datum+'/')
+        axios.get('http://127.0.0.1:8000/api/country-data-covid/'+datum+'/')
         .then(response => {
             document.getElementById("entrada1").value = FormatDoubleValues(response.data.infected);
             document.getElementById("entrada2").value = FormatDoubleValues(response.data.dead);
             document.getElementById("entrada3").value = FormatDoubleValues(response.data.uci);
             document.getElementById("fechaDatos").innerText = "Fecha reporte de los datos: " + response.data.fecha;
-            // console.log(`GET users`, dataCountry);
         })
         .catch(error => console.error(error));
     };
@@ -52,19 +68,18 @@ function refresh(svg, path, countryTooltip, countryById) {
         getUsers(datum.id);
         const $select = document.getElementById('selector');
         const $options = $select.options;
-        console.log("selectedIndex",$select.selectedIndex);
         for(var i in $options){
             if($options[i].value==datum.id){
                 $select.selectedIndex = $options[i].index;
             }
-            console.log($select.options[i].index);
         }
         
-        console.log("selectedIndex",$select.selectedIndex);
         
     });
     svg.selectAll(".land").attr("d", path)
     svg.selectAll(".boundary").attr("d", path)
+    svg.selectAll(".point").attr("d", path)
+    svg.selectAll(".line").attr("d", path)
     
 }
 
@@ -80,7 +95,6 @@ function mousemove(svg, path, countryTooltip, countryById, projection, event) {
         const[x, y] = d3.pointer(event, svg);
         var m1 = [x, y]
             , o1 = [o0[0] + (m1[0] - m0[0]) /6, o0[1] + (m0[1] - m1[1]) / 6];
-        console.log(o1);
         o1[1] = o1[1] > 30  ? 30  :
                 o1[1] < -30 ? -30 :
                 o1[1];
@@ -140,13 +154,13 @@ function WorldMap() {
                 .datum(graticule)
                 .attr("class", "graticule")
                 .attr("d", path);
+                
 
             /** Se inicializa el json donde está las úbicaciones de los paises se encuentra en la carpeta material*/
             var land;
             var countries;
             var world = d3.json("./data/world-110m.json")
             world.then(function(world) {
-                console.log(`world: `,world);
                 // if (error) throw error;
                 land = topojson.feature(world, world.objects.land);
                 svg.insert("path", ".graticule")
@@ -169,6 +183,43 @@ function WorldMap() {
                     .attr("class", "boundary")
                     .attr("d", path)
             });
+            
+            var places = Promise.all([d3.json("./data/places.json"), d3.json("./data/anchors.json")]);
+            var link = []
+            places.then(function([data , anchors]){
+                // svg.append("g").attr("class","points")
+                //     .selectAll("text").data(data.features)
+                //     .enter().append("path")
+                //     .attr("class", "point")
+                //     .attr("d", function(d){path(d)} );
+                svg.append("g").attr("class","points")
+                .selectAll("text").data(data.features)
+                .enter().append("path")
+                .attr("class", "point")
+                .attr("d", path);
+
+                anchors.forEach(function (a){
+                    var topush = {type: "LineString", coordinates: [a.source, a.target]}
+                    link.push(topush);
+                })
+                // data.features.forEach(function(a) {
+                //     data.features.forEach(function(b) {
+                //       if (a !== b) {
+                //         var topush = {type: "LineString", coordinates: [a.geometry.coordinates, b.geometry.coordinates]}
+                //         link.push(topush);
+                //       }
+                //     });
+                // });
+                svg.append("g").selectAll("myPath")
+                .data(link)
+                .enter().append("path")
+                    .attr("class","line")
+                    .attr("d", function(d){ return path(d)})
+                    .style("fill", "none")
+                    .style("stroke", "#69b3a2")
+                    .style("stroke-width", 2)
+            })
+            
             // d3.select(self.frameElement).style("height", height + "px");
 
             // Ejecuta mousemove y mouse up cuando el usuario selecione la ventana
@@ -184,7 +235,6 @@ function WorldMap() {
 
             var countryTooltip = d3.select(".mapamundi").append("div").attr("class", "countryTooltip");
             var countryData = d3.tsv("./data/world-country-names.tsv");
-            console.log(`countryData: `,countryData);
             countryData.then(function(datum){
                 datum.forEach(function(d){            
                     countryById[d.id] = d.name;
@@ -200,15 +250,20 @@ function WorldMap() {
 
             $selectorCountry.addEventListener("change",selectedCountry);
 
+            var isActive = true;
+            const activeNetFunction = () => {
+                isActive = activeNet(isActive, svg)
+            }
+            let btnActiveNet = document.getElementsByClassName("btAnimacion")
+            btnActiveNet[0].onclick = activeNetFunction
 
-            console.log(`countryById: `,countryById)
         }
     );
 
   return (
-      <div className='mapamundi'>
-      </div>
-  );
+        <div className='mapamundi'>
+        </div>     
+    );
 }
 
 export default WorldMap;

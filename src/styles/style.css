@@ -93,3 +93,6 @@ h2{
     font-size: 14px;
     font-family: sans-serif;
 }
+
+.point {  opacity: 0; }
+.line { opacity: .0; }
