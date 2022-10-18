@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
             <div className='contenedor-informacion'>
                 
                 <div className='clsButton'>
-                   <button className='btAnimacion' > <a href="#" target="_blank"></a>Activate Animation </button> 
+                   <button className='btAnimacion' > <a href="#" target="_blank"></a>Activate Network </button> 
                 </div>
                 
                 <div className='header-informacion'>
