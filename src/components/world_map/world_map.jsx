@@ -225,7 +225,7 @@ function WorldMap() {
                     .attr("class","line")
                     .attr("d", function(d){ return path(d)})
                     .style("fill", "none")
-                    .style("stroke", "#69b3a2")
+                    .style("stroke", "rgb(255, 115, 67)")
                     .style("stroke-width", 2)
             })
             
