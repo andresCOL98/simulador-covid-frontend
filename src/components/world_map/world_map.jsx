@@ -6,20 +6,29 @@ import axios from 'axios';
 
 // capturamos las secciones de nuestra pantalla que queremos que se mueva
 
-function activeNet(isActive, svg){
+function activeNet(isActive, svg, txtNetwork){
+
     if(!isActive){
         isActive = true;
         svg.selectAll(".line")
             .style("opacity", ".6")
         svg.selectAll(".point")
             .style("opacity", ".4")
+        
+        txtNetwork="Deactivate Network"
+        
+
     }else{
         isActive = false;
         svg.selectAll(".line")
             .style("opacity", ".0")
         svg.selectAll(".point")
             .style("opacity", ".0")
+
+        txtNetwork = "Activate Network"
     }
+    
+    document.getElementById("cntrlText").innerText = txtNetwork
     return isActive;
 }
 
@@ -30,7 +39,7 @@ function getUsers(datum){
             document.getElementById("entrada1").value = FormatDoubleValues(response.data.infected);
             document.getElementById("entrada2").value = FormatDoubleValues(response.data.dead);
             document.getElementById("entrada3").value = FormatDoubleValues(response.data.uci);
-            document.getElementById("fechaDatos").innerText = "Fecha reporte de los datos: " + response.data.fecha;
+            document.getElementById("fechaDatos").innerText = "Date report: " + response.data.fecha;
         })
         .catch(error => console.error(error));
     };
@@ -250,11 +259,13 @@ function WorldMap() {
 
             $selectorCountry.addEventListener("change",selectedCountry);
 
-            var isActive = true;
+            var isActive = false;
+            var txtNetwork = "Activate Network"
             const activeNetFunction = () => {
-                isActive = activeNet(isActive, svg)
+                isActive = activeNet(isActive, svg, txtNetwork)
             }
             let btnActiveNet = document.getElementsByClassName("btAnimacion")
+            document.getElementById("cntrlText").innerText = txtNetwork
             btnActiveNet[0].onclick = activeNetFunction
 
         }
