@@ -15,7 +15,7 @@ function activeNet(isActive, svg, txtNetwork){
         svg.selectAll(".point")
             .style("opacity", ".4")
         
-        txtNetwork="Deactivate Network"
+        txtNetwork="Deactivate Network";
         
 
     }else{
@@ -25,10 +25,10 @@ function activeNet(isActive, svg, txtNetwork){
         svg.selectAll(".point")
             .style("opacity", ".0")
 
-        txtNetwork = "Activate Network"
+        txtNetwork = "Activate Network";
     }
     
-    document.getElementById("cntrlText").innerText = txtNetwork
+    document.getElementById("cntrlText").innerText = txtNetwork;
     return isActive;
 }
 
@@ -260,13 +260,13 @@ function WorldMap() {
             $selectorCountry.addEventListener("change",selectedCountry);
 
             var isActive = false;
-            var txtNetwork = "Activate Network"
+            var txtNetwork = "Activate Network";
             const activeNetFunction = () => {
                 isActive = activeNet(isActive, svg, txtNetwork)
             }
-            let btnActiveNet = document.getElementsByClassName("btAnimacion")
-            document.getElementById("cntrlText").innerText = txtNetwork
-            btnActiveNet[0].onclick = activeNetFunction
+            let btnActiveNet = document.getElementsByClassName("btAnimacion");
+            document.getElementById("cntrlText").innerText = txtNetwork;
+            btnActiveNet[0].onclick = activeNetFunction;
 
         }
     );
