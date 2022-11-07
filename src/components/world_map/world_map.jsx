@@ -6,12 +6,26 @@ import axios from 'axios';
 
 // capturamos las secciones de nuestra pantalla que queremos que se mueva
 
-function activeNet(isActive, svg, txtNetwork){
+ function activeNet(isActive, svg, txtNetwork){
 
+    var delay = 0;
     if(!isActive){
         isActive = true;
         svg.selectAll(".line")
-            .style("opacity", ".6")
+        .each( function(d, i){
+            if(i!=0){
+                delay+=2000;
+            }
+            d3.select(this).transition()
+                .ease(d3.lineRadial)
+                .duration(2000)
+                .delay(delay)
+                .style("opacity", ".8")
+                .style("fill", "none")
+                .style("stroke", "rgb(255, 115, 67)")
+                .style("stroke-width", 2)
+        })
+            
         svg.selectAll(".point")
             .style("opacity", ".4")
         
@@ -21,6 +35,10 @@ function activeNet(isActive, svg, txtNetwork){
     }else{
         isActive = false;
         svg.selectAll(".line")
+            .transition()
+            .ease(d3.lineRadial)
+            .duration(0)
+            .delay(0)
             .style("opacity", ".0")
         svg.selectAll(".point")
             .style("opacity", ".0")
@@ -219,14 +237,12 @@ function WorldMap() {
                 //       }
                 //     });
                 // });
-                svg.append("g").selectAll("myPath")
+                svg.append("g").attr("class","lines").selectAll("myPath")
                 .data(link)
                 .enter().append("path")
                     .attr("class","line")
                     .attr("d", function(d){ return path(d)})
-                    .style("fill", "none")
-                    .style("stroke", "rgb(255, 115, 67)")
-                    .style("stroke-width", 2)
+                    .style("stroke-width", 1)
             })
             
             // d3.select(self.frameElement).style("height", height + "px");
